@@ -26,10 +26,12 @@ export async function stop() {
             log.stop()
         ]);
         console.log('Shutdown complete.');
+        process.exit(0);
     }
     catch (error) {
         console.error('Failed to shut down');
         console.error(error);
+        process.exit(1);
     }
 }
 
@@ -110,7 +112,7 @@ async function getConfig() {
     try {
         const worker = new Client('config:get', { timeout: 10000 });
         await worker.connect();
-        const [telegram, permissions, channels] = await worker.request(['telegram', 'permissions', 'rrb.channels']);
+        const [telegram, permissions, channels] = await worker.request(['telegram', 'permissions', 'rrb:channels']);
         await worker.disconnect();
         return { telegram, permissions, channels };
     }
