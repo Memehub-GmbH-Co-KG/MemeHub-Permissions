@@ -100,7 +100,6 @@ async function build(config) {
      * Checks wheter necessary config is missing to determin permissions. 
      */
     async function is_config_incomplete() {
-        console.log("is_config_incomplete", !config.telegram.group_id);
         return !config.telegram.group_id;
     }
 

@@ -7,9 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build": "docker build -t leifb/memehub-permissions:staging ."
+    "build": "docker build -t leifb/memehub-permissions ."
   },
-  "author": "",
+  "author": "leifb",
   "license": "ISC",
   "dependencies": {
     "docker-names": "^1.1.1",
