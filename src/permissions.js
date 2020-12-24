@@ -76,18 +76,32 @@ async function build(config) {
     }
 
     async function can_delete_messages(user_id) {
+        if (is_config_incomplete())
+            return true;
         const admins = await getAdmins();
         return admins.some(a => a.user.id == user_id && (a.status == 'creator' || a.can_delete_messages));
     }
 
     async function can_change_info(user_id) {
+        if (is_config_incomplete())
+            return true;
         const admins = await getAdmins();
         return admins.some(a => a.user.id == user_id && (a.status == 'creator' || a.can_change_info));
     }
 
     async function is_admin(user_id) {
+        if (is_config_incomplete())
+            return true;
         const admins = await getAdmins();
         return admins.some(a => a.user.id == user_id);
+    }
+
+    /**
+     * Checks wheter necessary config is missing to determin permissions. 
+     */
+    async function is_config_incomplete() {
+        console.log("is_config_incomplete", !config.telegram.group_id);
+        return !config.telegram.group_id;
     }
 
     async function stop() {
